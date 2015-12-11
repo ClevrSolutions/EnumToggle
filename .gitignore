@@ -44,14 +44,13 @@ Temporary Items
 
 
 #Mendix
-test/deployment
-test/resources
-test/theme
-test/javasource
-test/userlib
-test/.classpath
-test/.project
-test/test.launch
-test/deployment/model/config.json
+dev
+dev/resources
+dev/theme
+dev/javasource
+dev/userlib
+dev/.classpath
+dev/.project
+dev/test.launch
 *.project
 *.classpath
