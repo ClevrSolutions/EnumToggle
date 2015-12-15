@@ -30,6 +30,7 @@ define([
 		attrHandle: null,
         _handles: null,		
         _alertDiv: null,
+		_contextObj: null,
 		
 		
         constructor: function() {
@@ -61,15 +62,21 @@ define([
 			this.actLoaded();
 		},
 		update : function (obj, callback) {
+			var i;
 			if (obj) {
+				this._contextObj = obj;
 				this.contextGUID = obj.getGuid();
-				this._resetSubscriptions();			
+				this._resetSubscriptions();		
+				for (i = 0; i < this.notused.length; i+=1) {
+					this.checkEnumValue(this.notused[i].captions);				
+				}
 			}
 			if (callback) {
 				callback();
 			}
 		},
 		_setValueAttr : function (value) {
+			this._clearValidations();
 			var i = this.caption.indexOf(value);
 			var imgurl = "";
 			var imgalt = "";
@@ -88,7 +95,6 @@ define([
 				alt : imgalt,
 				title : imgalt
 			});
-			this._clearValidations();
 		},
 		_getValueAttr : function (value) {
 			return this.caption[this.curindex];
@@ -98,13 +104,22 @@ define([
 		textChange : function (e) {
 			this.onChange();
 		},
+		checkEnumValue: function(value) {
+			if (this._contextObj) {
+				var kv = this._contextObj.getEnumKVPairs(this.name);
+				if (kv && !kv[value]) {
+					this._addValidation(" The value: " + value + " is not valid for this enumeration");
+				}
+			}	
+		},
 		onClick : function (e) {
-			console.log('onclick');
+			this._clearValidations();
 			this.curindex = (this.curindex >= this.caption.length - 1 ? 0 : this.curindex + 1);
 			dojo.attr(this.img, {
 				src : this.imgurls[this.curindex],
 				title : this.imgalts[this.curindex]
 			});
+			this.checkEnumValue(this._contextObj.get[this.name]);
 			this.onChange();
 			var mf = this.onChangemf;
 			if (mf != '') {
@@ -119,10 +134,8 @@ define([
 				};
 				mx.data.action(params);
 			}
-			this._clearValidations();
 		},
         _handleValidation: function(validations) {
-			console.log('validations', validations);
             this._clearValidations();
 
             var validation = validations[0],
@@ -143,8 +156,7 @@ define([
         },
 
         // Show an error message.
-        _showError: function(message) {
-			console.log('message', message);
+        _addValidation: function(message) {
             if (this._alertDiv !== null) {
                 dojoHtml.set(this._alertDiv, message);
                 return true;
@@ -154,11 +166,6 @@ define([
                 "innerHTML": message
             });
             this.domNode.appendChild(this._alertDiv);
-        },
-
-        // Add a validation.
-        _addValidation: function(message) {
-            this._showError(message);
         },
 
         // Reset subscriptions.
@@ -171,11 +178,12 @@ define([
                 this._handles = [];
             }
 
-            // When a mendix object exists create subscribtions. 
+            // When a mendix object exists create subscriptions. 
             if (this.contextGUID) {
+				console.log('subscribe');
                 var attrHandle = this.subscribe({
                     guid: this.contextGUID,
-                    attr: this.backgroundColor,
+                    attr: this.name,
                     callback: dojo.hitch(this, function(guid, attr, attrValue) {
                         this._setValueAttr(attrValue);
                     })
