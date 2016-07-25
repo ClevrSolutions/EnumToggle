@@ -4,8 +4,8 @@ define([
 		"mxui/widget/_WidgetBase",
 		"dojo/dom-construct",
 		"dojo/html",
-		"dojo/_base/array"		
-		
+		"dojo/_base/array"
+
 
 	], function (declare, _WidgetBase, dojoConstruct, dojoHtml, dojoArray) {
 	"use strict";
@@ -28,14 +28,14 @@ define([
 		curindex : 0,
 		img : null,
 		attrHandle: null,
-        _handles: null,		
+        _handles: null,
         _alertDiv: null,
 		_contextObj: null,
-		
-		
+
+
         constructor: function() {
             this._handles = [];
-        },		
+        },
 
 		postCreate : function () {
 			var i;
@@ -66,9 +66,9 @@ define([
 			if (obj) {
 				this._contextObj = obj;
 				this.contextGUID = obj.getGuid();
-				this._resetSubscriptions();		
+				this._resetSubscriptions();
 				for (i = 0; i < this.notused.length; i+=1) {
-					this.checkEnumValue(this.notused[i].captions);				
+					this.checkEnumValue(this.notused[i].captions);
 				}
 			}
 			if (callback) {
@@ -82,12 +82,12 @@ define([
 			var imgalt = "";
 			if ((i >= 0) && (i < this.caption.length)) {
 				this.curindex = i;
-				imgurl = this.imgurls[i];
+				imgurl = mx.remoteUrl + this.imgurls[i];
 				imgalt = this.imgalts[i];
 			} else {
 				// set the index to last of the enum so the click will put it to the first
 				this.curindex = this.caption.length - 1;
-				imgurl = this.defaultpicture;
+				imgurl = mx.remoteUrl + this.defaultpicture;
 				imgalt = "";
 			}
 			dojo.attr(this.img, {
@@ -110,7 +110,7 @@ define([
 				if (kv && !kv[value]) {
 					this._addValidation(" The value: " + value + " is not valid for this enumeration");
 				}
-			}	
+			}
 		},
 		onClick : function (e) {
 			this._clearValidations();
@@ -178,7 +178,7 @@ define([
                 this._handles = [];
             }
 
-            // When a mendix object exists create subscriptions. 
+            // When a mendix object exists create subscriptions.
             if (this.contextGUID) {
 				console.log('subscribe');
                 var attrHandle = this.subscribe({
