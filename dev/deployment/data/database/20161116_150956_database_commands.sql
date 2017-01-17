@@ -1,0 +1,235 @@
+CREATE TABLE "system$backgroundjob" (
+	"id" BIGINT NOT NULL,
+	"endtime" TIMESTAMP NULL,
+	"starttime" TIMESTAMP NULL,
+	"successful" BOOLEAN NULL,
+	"jobid" BIGINT NULL,
+	"result" VARCHAR_IGNORECASE(2147483647) NULL,
+	PRIMARY KEY("id"));
+CREATE INDEX "idx_system$backgroundjob_jobid" ON "system$backgroundjob" ("jobid","id");
+INSERT INTO "mendixsystem$entity" ("id", 
+"entity_name", 
+"table_name")
+ VALUES ('660db38b-5ab4-4d15-b649-93a947ecea82', 
+'System.BackgroundJob', 
+'system$backgroundjob');
+INSERT INTO "mendixsystem$attribute" ("id", 
+"entity_id", 
+"attribute_name", 
+"column_name", 
+"type", 
+"length", 
+"default_value", 
+"is_auto_number")
+ VALUES ('9c471b02-f266-4e27-9e2f-907d0fad6552', 
+'660db38b-5ab4-4d15-b649-93a947ecea82', 
+'EndTime', 
+'endtime', 
+20, 
+0, 
+'', 
+false);
+INSERT INTO "mendixsystem$attribute" ("id", 
+"entity_id", 
+"attribute_name", 
+"column_name", 
+"type", 
+"length", 
+"default_value", 
+"is_auto_number")
+ VALUES ('d5aa1ceb-6dfe-457b-afb7-e969a814eafd', 
+'660db38b-5ab4-4d15-b649-93a947ecea82', 
+'StartTime', 
+'starttime', 
+20, 
+0, 
+'', 
+false);
+INSERT INTO "mendixsystem$attribute" ("id", 
+"entity_id", 
+"attribute_name", 
+"column_name", 
+"type", 
+"length", 
+"default_value", 
+"is_auto_number")
+ VALUES ('c56553ba-a3d4-4d9e-bc81-e61ee64da79b', 
+'660db38b-5ab4-4d15-b649-93a947ecea82', 
+'Successful', 
+'successful', 
+10, 
+0, 
+'false', 
+false);
+INSERT INTO "mendixsystem$attribute" ("id", 
+"entity_id", 
+"attribute_name", 
+"column_name", 
+"type", 
+"length", 
+"default_value", 
+"is_auto_number")
+ VALUES ('97bcc327-4d2b-4a28-a57a-7e7437416bfe', 
+'660db38b-5ab4-4d15-b649-93a947ecea82', 
+'JobId', 
+'jobid', 
+4, 
+0, 
+'0', 
+false);
+INSERT INTO "mendixsystem$attribute" ("id", 
+"entity_id", 
+"attribute_name", 
+"column_name", 
+"type", 
+"length", 
+"default_value", 
+"is_auto_number")
+ VALUES ('c33867e7-7263-4ce6-826a-714e7493f07a', 
+'660db38b-5ab4-4d15-b649-93a947ecea82', 
+'Result', 
+'result', 
+30, 
+0, 
+'', 
+false);
+INSERT INTO "mendixsystem$index" ("id", 
+"table_id", 
+"index_name")
+ VALUES ('a5ff48ca-56d6-4f43-8e3a-7743fd025974', 
+'660db38b-5ab4-4d15-b649-93a947ecea82', 
+'idx_system$backgroundjob_jobid');
+INSERT INTO "mendixsystem$index_column" ("index_id", 
+"column_id", 
+"sort_order", 
+"ordinal")
+ VALUES ('a5ff48ca-56d6-4f43-8e3a-7743fd025974', 
+'97bcc327-4d2b-4a28-a57a-7e7437416bfe', 
+false, 
+0);
+CREATE TABLE "system$backgroundjob_session" (
+	"system$backgroundjobid" BIGINT NOT NULL,
+	"system$sessionid" BIGINT NOT NULL,
+	PRIMARY KEY("system$backgroundjobid","system$sessionid"));
+CREATE INDEX "idx_system$backgroundjob_session_system$session_system$backgroundjob" ON "system$backgroundjob_session" ("system$sessionid","system$backgroundjobid");
+INSERT INTO "mendixsystem$association" ("id", 
+"association_name", 
+"table_name", 
+"parent_entity_id", 
+"child_entity_id", 
+"parent_column_name", 
+"child_column_name", 
+"index_name")
+ VALUES ('19892a2b-f17a-4c29-80c1-c81f8025b36c', 
+'System.BackgroundJob_Session', 
+'system$backgroundjob_session', 
+'660db38b-5ab4-4d15-b649-93a947ecea82', 
+'37f9fd49-5318-4c63-9a51-f761779b202f', 
+'system$backgroundjobid', 
+'system$sessionid', 
+'idx_system$backgroundjob_session_system$session_system$backgroundjob');
+CREATE TABLE "system$backgroundjob_xasinstance" (
+	"system$backgroundjobid" BIGINT NOT NULL,
+	"system$xasinstanceid" BIGINT NOT NULL,
+	PRIMARY KEY("system$backgroundjobid","system$xasinstanceid"));
+CREATE INDEX "idx_system$backgroundjob_xasinstance_system$xasinstance_system$backgroundjob" ON "system$backgroundjob_xasinstance" ("system$xasinstanceid","system$backgroundjobid");
+INSERT INTO "mendixsystem$association" ("id", 
+"association_name", 
+"table_name", 
+"parent_entity_id", 
+"child_entity_id", 
+"parent_column_name", 
+"child_column_name", 
+"index_name")
+ VALUES ('fc3944c4-7a19-4a4d-9b0d-4a0c9d7aeb23', 
+'System.BackgroundJob_XASInstance', 
+'system$backgroundjob_xasinstance', 
+'660db38b-5ab4-4d15-b649-93a947ecea82', 
+'d4154981-8dac-4150-aec5-efa3ef62a7a2', 
+'system$backgroundjobid', 
+'system$xasinstanceid', 
+'idx_system$backgroundjob_xasinstance_system$xasinstance_system$backgroundjob');
+CREATE TABLE "system$tokeninformation" (
+	"id" BIGINT NOT NULL,
+	"expirydate" TIMESTAMP NULL,
+	"useragent" VARCHAR_IGNORECASE(2147483647) NULL,
+	"token" VARCHAR_IGNORECASE(200) NULL,
+	PRIMARY KEY("id"));
+INSERT INTO "mendixsystem$entity" ("id", 
+"entity_name", 
+"table_name")
+ VALUES ('09b2f0fe-4a11-4afc-a16e-94992a3ebc3d', 
+'System.TokenInformation', 
+'system$tokeninformation');
+INSERT INTO "mendixsystem$attribute" ("id", 
+"entity_id", 
+"attribute_name", 
+"column_name", 
+"type", 
+"length", 
+"default_value", 
+"is_auto_number")
+ VALUES ('8bb77a0c-0461-43f9-bb27-e91fb9e3623f', 
+'09b2f0fe-4a11-4afc-a16e-94992a3ebc3d', 
+'ExpiryDate', 
+'expirydate', 
+20, 
+0, 
+'', 
+false);
+INSERT INTO "mendixsystem$attribute" ("id", 
+"entity_id", 
+"attribute_name", 
+"column_name", 
+"type", 
+"length", 
+"default_value", 
+"is_auto_number")
+ VALUES ('0b9398e4-9bb7-4ab8-958c-43526f2c83bf', 
+'09b2f0fe-4a11-4afc-a16e-94992a3ebc3d', 
+'UserAgent', 
+'useragent', 
+30, 
+0, 
+'', 
+false);
+INSERT INTO "mendixsystem$attribute" ("id", 
+"entity_id", 
+"attribute_name", 
+"column_name", 
+"type", 
+"length", 
+"default_value", 
+"is_auto_number")
+ VALUES ('a169a8d1-b10f-427b-b492-3aebeabb7cd6', 
+'09b2f0fe-4a11-4afc-a16e-94992a3ebc3d', 
+'Token', 
+'token', 
+30, 
+200, 
+'', 
+false);
+CREATE TABLE "system$tokeninformation_user" (
+	"system$tokeninformationid" BIGINT NOT NULL,
+	"system$userid" BIGINT NOT NULL,
+	PRIMARY KEY("system$tokeninformationid","system$userid"));
+CREATE INDEX "idx_system$tokeninformation_user_system$user_system$tokeninformation" ON "system$tokeninformation_user" ("system$userid","system$tokeninformationid");
+INSERT INTO "mendixsystem$association" ("id", 
+"association_name", 
+"table_name", 
+"parent_entity_id", 
+"child_entity_id", 
+"parent_column_name", 
+"child_column_name", 
+"index_name")
+ VALUES ('20ca86b2-5a00-4131-aee1-427cb2e94425', 
+'System.TokenInformation_User', 
+'system$tokeninformation_user', 
+'09b2f0fe-4a11-4afc-a16e-94992a3ebc3d', 
+'282e2e60-88a5-469d-84a5-ba8d9151644f', 
+'system$tokeninformationid', 
+'system$userid', 
+'idx_system$tokeninformation_user_system$user_system$tokeninformation');
+UPDATE "mendixsystem$version"
+ SET "versionnumber" = '4.0.7', 
+"lastsyncdate" = '20161116 15:09:47';

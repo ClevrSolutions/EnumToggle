@@ -1,0 +1,10 @@
+Buildfile: C:\Users\Chris\Documents\GitHub\EnumToggle\dev\deployment\build_core.xml
+
+deploy:
+    [unzip] Expanding: C:\Program Files\Mendix\6.9.1\modeler\deployment.mxz into C:\Users\Chris\Documents\GitHub\EnumToggle\dev\deployment
+
+BUILD SUCCESSFUL
+Total time: 0 seconds
+
+
+
