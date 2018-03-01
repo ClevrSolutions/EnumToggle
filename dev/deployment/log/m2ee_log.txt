@@ -1,0 +1,4 @@
+ShellTUI: Unable to read from stdin...exiting.
+
+-> 
+

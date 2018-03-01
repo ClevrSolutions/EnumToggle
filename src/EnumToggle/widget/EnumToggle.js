@@ -186,6 +186,9 @@ define([
                     attr: this.name,
                     callback: dojo.hitch(this, function(guid, attr, attrValue) {
                         this._setValueAttr(attrValue);
+						if (attr==this.name) {
+							this._setValueAttr(attrValue);
+						}
                     })
                 });
 
