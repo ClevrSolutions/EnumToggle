@@ -39,10 +39,11 @@ EFys9HZcqkKgz6qKu6pwhzavYcnVruf/CTAAJfBPNMYgZnwAAAAASUVORK5CYII=
 		<property key="name" type="attribute" required="true" isPath="optional" pathType="reference">
 			<caption>Attribute</caption>
 			<category>Data source</category>
-			<description>The attribute to manipulate</description> 
+			<description>The attribute to manipulate</description>
 			<attributeTypes>
-				<attributeType name="String"/> 
-				<attributeType name="Enum"/> 
+				<attributeType name="String"/>
+				<attributeType name="Enum"/>
+				<attributeType name="Boolean"/> 				
 			</attributeTypes>
 		</property>
 		<property key="readonlyval" type="boolean" defaultValue="false">
@@ -63,7 +64,7 @@ EFys9HZcqkKgz6qKu6pwhzavYcnVruf/CTAAJfBPNMYgZnwAAAAASUVORK5CYII=
 				<property key="captions" type="string" required="true">
 					<caption>Enum key</caption>
 					<category>Appearance</category>
-					<description>This should be exactly the same values as the connected enumeration.</description>  
+					<description>This should be exactly the same values as the connected enumeration.</description>
 				</property>
 				<property key="pictures" type="image">
 					<caption>Picture</caption>
@@ -73,15 +74,15 @@ EFys9HZcqkKgz6qKu6pwhzavYcnVruf/CTAAJfBPNMYgZnwAAAAASUVORK5CYII=
 				<property key="alts" type="translatableString" required="false">
 					<caption>Hint</caption>
 					<category>Appearance</category>
-					<description>A text that is displayed when the mouse is moved over the image (also known as alt).</description>  
+					<description>A text that is displayed when the mouse is moved over the image (also known as alt).</description>
 				</property>
 			</properties>
-		</property>	
+		</property>
         <property key="onChangemf" type="microflow" required="false" >
             <caption>On change</caption>
             <category>Events</category>
             <description>Microflow to trigger on change.</description>
             <returnType type="Boolean"/>
-        </property>		
+        </property>
 	</properties>
 </widget>
