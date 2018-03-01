@@ -168,20 +168,14 @@ define([
             this.domNode.appendChild(this._alertDiv);
         },
 
-        // Reset subscriptions.
-        _resetSubscriptions: function() {
+		// Reset subscriptions.
+        _resetSubscriptions: function () {
             // Release handles on previous object, if any.
-            if (this._handles) {
-                dojoArray.forEach(this._handles, function (handle) {
-                    mx.data.unsubscribe(handle);
-                });
-                this._handles = [];
-            }
+            this.unsubscribeAll();
 
-            // When a mendix object exists create subscriptions.
-            if (this.contextGUID) {
-				console.log('subscribe');
-                var attrHandle = this.subscribe({
+            // When a mendix object exists create subscribtions.
+            if (this._contextObj) {
+                this.subscribe({
                     guid: this.contextGUID,
                     attr: this.name,
                     callback: dojo.hitch(this, function(guid, attr, attrValue) {
@@ -190,16 +184,14 @@ define([
 							this._setValueAttr(attrValue);
 						}
                     })
-                });
+				});
 
-                var validationHandle = this.subscribe({
+				this.subscribe({
                     guid: this.contextGUID,
                     val: true,
                     callback: dojo.hitch(this, this._handleValidation)
                 });
-
-                this._handles = [attrHandle, validationHandle ];
-            }
-        }
+			}
+        },
 	});
 });
