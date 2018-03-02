@@ -12,6 +12,8 @@ test/.project
 .idea/
 
 dist/
+dev/deployment
+npm-debug.log
 
 node_modules/
 .editorconfig

@@ -1,8 +1,8 @@
 Buildfile: C:\Users\Chris\Documents\GitHub\EnumToggle\dev\deployment\build_core.xml
 
 compile:
-    [javac] Compiling 2 source files to C:\Users\Chris\Documents\GitHub\EnumToggle\dev\deployment\run\bin
-    [javac] Note: C:\Users\Chris\Documents\GitHub\EnumToggle\dev\javasource\com\mendix\core\Core.java uses or overrides a deprecated API.
+    [javac] Compiling 42 source files to C:\Users\Chris\Documents\GitHub\EnumToggle\dev\deployment\run\bin
+    [javac] Note: Some input files use or override a deprecated API.
     [javac] Note: Recompile with -Xlint:deprecation for details.
     [javac] Note: C:\Users\Chris\Documents\GitHub\EnumToggle\dev\javasource\com\mendix\core\Core.java uses unchecked or unsafe operations.
     [javac] Note: Recompile with -Xlint:unchecked for details.
@@ -17,7 +17,7 @@ build:
       [bnd] # project (project.jar) 71 
 
 BUILD SUCCESSFUL
-Total time: 2 seconds
+Total time: 5 seconds
 
 
 

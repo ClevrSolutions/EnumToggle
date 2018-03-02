@@ -180,12 +180,10 @@ define([
 
             // When a mendix object exists create subscriptions.
             if (this.contextGUID) {
-				console.log('subscribe');
                 var attrHandle = this.subscribe({
                     guid: this.contextGUID,
                     attr: this.name,
                     callback: dojo.hitch(this, function(guid, attr, attrValue) {
-                        this._setValueAttr(attrValue);
 						if (attr==this.name) {
 							this._setValueAttr(attrValue);
 						}
