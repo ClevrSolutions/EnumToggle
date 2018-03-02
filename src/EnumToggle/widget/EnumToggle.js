@@ -5,15 +5,11 @@ define([
 		"dojo/dom-construct",
 		"dojo/html",
 		"dojo/_base/array"
-
-
 	], function (declare, _WidgetBase, dojoConstruct, dojoHtml, dojoArray) {
 	"use strict";
 
-
 	return declare('EnumToggle.widget.EnumToggle', [_WidgetBase], {
 
-		//inputargs : {
 		name : '',
 		defaultpicture : '',
 		notused : [], //value array, keep it compatible with mx4
@@ -77,7 +73,8 @@ define([
 		},
 		_setValueAttr : function (value) {
 			this._clearValidations();
-			var i = this.caption.indexOf(value);
+			// ""+ will change true into "true"
+			var i = this.caption.indexOf(""+value);
 			var imgurl = "";
 			var imgalt = "";
 			if ((i >= 0) && (i < this.caption.length)) {
@@ -97,7 +94,11 @@ define([
 			});
 		},
 		_getValueAttr : function (value) {
-			return this.caption[this.curindex];
+			if (this._contextObj.isBoolean(this.name)) {
+				return (this.caption[this.curindex] == "true")
+			} else {
+				return this.caption[this.curindex];
+			}
 		},
 		//stub function, will be used or replaced by the client environment
 		onChange : function () {},
@@ -105,7 +106,7 @@ define([
 			this.onChange();
 		},
 		checkEnumValue: function(value) {
-			if (this._contextObj) {
+			if (this._contextObj && !this._contextObj.isBoolean(this.name)) {  
 				var kv = this._contextObj.getEnumKVPairs(this.name);
 				if (kv && !kv[value]) {
 					this._addValidation(" The value: " + value + " is not valid for this enumeration");
@@ -168,19 +169,13 @@ define([
             this.domNode.appendChild(this._alertDiv);
         },
 
-        // Reset subscriptions.
-        _resetSubscriptions: function() {
+        _resetSubscriptions: function () {
             // Release handles on previous object, if any.
-            if (this._handles) {
-                dojoArray.forEach(this._handles, function (handle) {
-                    mx.data.unsubscribe(handle);
-                });
-                this._handles = [];
-            }
+            this.unsubscribeAll();
 
-            // When a mendix object exists create subscriptions.
-            if (this.contextGUID) {
-                var attrHandle = this.subscribe({
+            // When a mendix object exists create subscribtions.
+            if (this._contextObj) {
+                this.subscribe({
                     guid: this.contextGUID,
                     attr: this.name,
                     callback: dojo.hitch(this, function(guid, attr, attrValue) {
@@ -188,16 +183,14 @@ define([
 							this._setValueAttr(attrValue);
 						}
                     })
-                });
+				});
 
-                var validationHandle = this.subscribe({
+				this.subscribe({
                     guid: this.contextGUID,
                     val: true,
                     callback: dojo.hitch(this, this._handleValidation)
                 });
-
-                this._handles = [attrHandle, validationHandle ];
-            }
+			}
         }
 	});
 });

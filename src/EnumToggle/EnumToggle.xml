@@ -43,6 +43,7 @@ EFys9HZcqkKgz6qKu6pwhzavYcnVruf/CTAAJfBPNMYgZnwAAAAASUVORK5CYII=
 			<attributeTypes>
 				<attributeType name="String"/> 
 				<attributeType name="Enum"/> 
+				<attributeType name="Boolean"/> 
 			</attributeTypes>
 		</property>
 		<property key="readonlyval" type="boolean" defaultValue="false">
