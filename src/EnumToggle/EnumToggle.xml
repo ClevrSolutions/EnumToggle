@@ -54,7 +54,7 @@ EFys9HZcqkKgz6qKu6pwhzavYcnVruf/CTAAJfBPNMYgZnwAAAAASUVORK5CYII=
 		<property key="defaultpicture" type="image" required="true">
 			<caption>Default picture</caption>
 			<category>Behavior</category>
-			<description>The image that is displayed when an enumation value is not found.</description>
+			<description>The image that is displayed when an enumeration value is not found.</description>
 		</property>
 		<property key="notused" type="object" isList="true" required="false">
 			<caption>Values</caption>

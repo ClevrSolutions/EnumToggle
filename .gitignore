@@ -20,3 +20,6 @@ node_modules/
 *DS_Store*
 .vscode/
 *.bak
+test/*
+test2/*
+test/widgets/*
